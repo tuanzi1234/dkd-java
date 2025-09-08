@@ -2,6 +2,8 @@ package com.dkd.manage.service.impl;
 
 import java.util.List;
 import com.dkd.common.utils.DateUtils;
+import com.dkd.common.utils.SecurityUtils;
+import com.dkd.manage.domain.vo.PartnerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.dkd.manage.mapper.PartnerMapper;
@@ -53,6 +55,9 @@ public class PartnerServiceImpl implements IPartnerService
     @Override
     public int insertPartner(Partner partner)
     {
+        // 新增账户时，对密码进行加密
+        String secretPassword = SecurityUtils.encryptPassword(partner.getPassword());
+        partner.setPassword(secretPassword);
         partner.setCreateTime(DateUtils.getNowDate());
         return partnerMapper.insertPartner(partner);
     }
@@ -92,5 +97,16 @@ public class PartnerServiceImpl implements IPartnerService
     public int deletePartnerById(Long id)
     {
         return partnerMapper.deletePartnerById(id);
+    }
+
+    /**
+     * 查询合作商管理列表
+     *
+     * @param partner 合作商管理
+     * @return 合作商管理
+     */
+    @Override
+    public List<PartnerVo> selectPartnerListVo(Partner partner) {
+        return partnerMapper.selectPartnerListVo(partner);
     }
 }
