@@ -58,4 +58,11 @@ public interface ISkuService
      * @return 结果
      */
     public int deleteSkuBySkuId(Long skuId);
+
+    /**
+     * 批量插入商品
+     *
+     * @param skuList
+     */
+    public int insertSkuList(List<Sku> skuList);
 }
