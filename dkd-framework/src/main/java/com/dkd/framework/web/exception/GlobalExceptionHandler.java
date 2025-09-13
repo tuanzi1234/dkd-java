@@ -133,8 +133,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public AjaxResult handleDataIntegrityViolationException(DataIntegrityViolationException e) {
         log.error(e.getMessage(), e);
+        // 数据关联异常
         if (e.getMessage().contains("foreign")){
             return AjaxResult.error("无法删除，数据被关联");
+        }
+        // 数据重复异常
+        if (e.getMessage().contains("Duplicate")){
+            return AjaxResult.error("无法保存，数据重复");
         }
         return AjaxResult.error("数据完整性异常");
     }
