@@ -58,4 +58,12 @@ public interface TaskDetailsMapper
      * @return 结果
      */
     public int deleteTaskDetailsByDetailsIds(Long[] detailsIds);
+
+    /**
+     * 批量插入工单详情，只有补货工单才有
+     *
+     * @param taskDetailsList 需要插入的数据集合
+     * @return 插入结果
+     */
+    int insertTaskDetailsBatch( List<TaskDetails> taskDetailsList);
 }
