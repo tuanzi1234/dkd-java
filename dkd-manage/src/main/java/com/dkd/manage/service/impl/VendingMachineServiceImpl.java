@@ -95,9 +95,9 @@ public class VendingMachineServiceImpl implements IVendingMachineService {
             for (int j = 1; j <= vmType.getVmCol(); j++) {
                 // 封装channel对象
                 Channel channel = new Channel();
-                channel.setInnerCode(innerCode + "_" + i + "_" + j); // 货道编号
+                channel.setInnerCode(innerCode); // 货道编号
                 channel.setVmId(vendingMachine.getId());
-                channel.setChannelCode(vendingMachine.getInnerCode()); //售货机编号
+                channel.setChannelCode(i + "-" + j); //售货机编号
                 channel.setMaxCapacity(vmType.getChannelMaxCapacity()); //货道容量
                 channel.setCreateTime(DateUtils.getNowDate()); // 创建时间
                 channel.setUpdateTime(DateUtils.getNowDate()); // 更新时间
